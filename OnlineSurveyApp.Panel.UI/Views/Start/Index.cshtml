@@ -1,0 +1,42 @@
+﻿@using OnlineSurveyApp.EntityLayer.Entities
+@model Test
+
+@{
+    ViewData["Title"] = "Start";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<section class="py-5">
+    <div class="container px-5 mb-5">
+        <div class="text-center mb-5">
+            <h5 class="display-12 fw-bolder mb-0"><span class="text-gradient d-inline">@ViewBag.UserName @ViewBag.GuestName 'ın testi </span></h5>
+            <br />
+            <small>@ViewBag.TestId numaralı test</small>
+        </div>
+        <div class="row gx-5 justify-content-center">
+            <div class="col-lg-11 col-xl-9 col-xxl-8">
+
+                <section class="py-5 bg-gradient-primary-to-secondary text-white">
+                    <div class="container px-5 my-5">
+                        <div class="text-center">
+                            <h2 class="display-4 fw-bolder mb-4">Hoş geldiniz</h2>
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <a class="btn btn-outline-light btn-lg px-5 py-3 fs-6 fw-bolder" href="/Start/Test/@ViewBag.TestId">Testi başlat</a>
+                            }
+                            else
+                            {
+                                <a class="btn btn-outline-light btn-lg px-5 py-3 fs-6 fw-bolder" href="/Start/Guest/@ViewBag.TestId">Testi başlat</a>
+                            }
+
+                        </div>
+                    </div>
+                </section>
+
+                @await Component.InvokeAsync("_ScoreList", ViewBag.TestId )
+
+            </div>
+        </div>
+    </div>
+</section>
+

@@ -1,0 +1,42 @@
+﻿@using OnlineSurveyApp.EntityLayer.Entities;
+@model List<Question>
+
+@{
+    ViewData["Title"] = "QuestionList";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<section class="py-5">
+    <div class="container px-5 mb-5">
+        <div class="text-center mb-5">
+            <h5 class="display-12 fw-bolder mb-0"><span class="text-gradient d-inline">Sistemdeki sorular</span></h5>
+        </div>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Soru</th>
+                    <th scope="col">Sil</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <th scope="row">@item.ID</th>
+                        <td>@item.Text</td>
+                        <td><a href="/Admin/DeleteQuestion/@item.ID" type="button" class="btn btn-danger btn-sm">Sil</a></td>
+                    </tr>
+                }
+
+
+            
+            </tbody>
+        </table>
+        <br>
+        <a asp-controller="Admin" asp-action="CreateQuestion" class="btn btn-primary me-2">Yeni soru ekle</a>
+        <a href="/Admin/QuestionApproval" class="btn btn-primary">Onay bekleyen soruları incele</a>
+    </div>
+</section>
+

@@ -1,0 +1,93 @@
+﻿@model SignInViewModel
+
+@{
+    ViewData["Title"] = "SignIn";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<main class="flex-shrink-0">
+    <!-- Header-->
+    <header class="py-5">
+        <section class="py-5">
+            <div class="container px-5 mb-5">
+                <div class="text-center mb-5">
+                    <h5 class="display-12 fw-bolder mb-0"><span class="text-gradient d-inline"><a href="index.html">Beni Tanıyor Musun?</a></span></h5>
+                    <h1 class="display-5 fw-bolder mb-0 mt-3"><span class="text-gradient d-inline">Giriş Yap</span></h1>
+
+                </div>
+                <form method="post" action="SignIn">
+                <div class="row gx-5 justify-content-center">
+                    <div class="col-lg-11 col-xl-9 col-xxl-8">
+                        <!-- Project Card 1-->
+                        <div class="card overflow-hidden shadow rounded-4 border-0 mb-5">
+                            <div class="card-body p-0">
+
+                                <div class="p-5">
+
+                                    <div class="mb-3">
+                                        <label for="exampleFormControlInput1" class="form-label">E-Posta Adresi</label>
+                                        <input type="email" class="form-control" id="exampleFormControlInput1" asp-for="@Model.Email" placeholder="name@example.com">
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="exampleFormControlInput1" class="form-label">Şifre</label>
+                                        <input type="password" asp-for="@Model.Password" class="form-control" id="exampleFormControlInput1" placeholder="*********">
+                                            <span asp-validation-for="@Model.Password" class="text-danger"></span>
+                                    </div>
+
+                                        @if (!string.IsNullOrEmpty(ViewData.ModelState["recaptcha"]?.Errors?.FirstOrDefault()?.ErrorMessage))
+                                        {
+                                            <span class="error" style="color:red;font-family:Arial;">@Html.Raw(ViewData.ModelState["recaptcha"].Errors.FirstOrDefault().ErrorMessage)</span>
+                                        }
+
+                                        @if (!string.IsNullOrEmpty(ViewData.ModelState["lockOutAccount"]?.Errors?.FirstOrDefault()?.ErrorMessage))
+                                        {
+                                            <span class="error" style="color:red;font-family:Arial;">@Html.Raw(ViewData.ModelState["lockOutAccount"].Errors.FirstOrDefault().ErrorMessage)</span>
+                                        }
+
+                                        @if (!string.IsNullOrEmpty(ViewData.ModelState["noFoundUser"]?.Errors?.FirstOrDefault()?.ErrorMessage))
+                                        {
+                                            <span class="error" style="color:red;font-family:Arial;">@Html.Raw(ViewData.ModelState["noFoundUser"].Errors.FirstOrDefault().ErrorMessage)</span>
+                                        }
+
+                                        @if (!string.IsNullOrEmpty(ViewData.ModelState["recaptcha"]?.Errors?.FirstOrDefault()?.ErrorMessage))
+                                        {
+                                            <span class="error" style="color:red;font-family:Arial;">@Html.Raw(ViewData.ModelState["recaptcha"].Errors.FirstOrDefault().ErrorMessage)</span>
+                                        }
+
+                                        <br />
+                                        <div class="container">
+                                            <div class="row justify-content-center">
+                                                <div class="col-lg-6 col-md-6 col-xl-6 col-sm-6">
+                                                    <div class="g-recaptcha" data-sitekey="6LcvSUcoAAAAAIpxEfjIaeiNqy-gxAOdX4jhB_ze"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    <div class="d-grid col-6 mx-auto mt-5">
+                                        <button class="btn btn-primary" type="submit">Giriş Yap</button>
+                                    </div>
+
+
+                                    <div class="d-grid col-6 mx-auto mt-5">
+                                        <a href="Account/SignUp" class="btn btn-primary" type="button">Üye Ol</a>
+                                    </div>
+                                </div>
+                                    @if (TempData["AccountActivated"] != null)
+                                    {
+                                        <div class="text-success">
+                                            @TempData["AccountActivated"]
+                                        </div>
+                                    }
+                            </div>
+
+             
+                        </div>
+                    </div>
+                </div>
+                </form>
+        </section>
+</main>
+
+<script src="https://www.google.com/recaptcha/api.js"></script>

@@ -1,0 +1,65 @@
+﻿@model ConfirmMailViewModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+
+<section class="py-5">
+    <div class="container px-5 mb-5">
+        <div class="text-center mb-5">
+            <h5 class="display-12 fw-bolder mb-0"><span class="text-gradient d-inline"><a href="index.html">Beni Tanıyor Musun?</a></span></h5>
+
+        </div>
+        <div class="row gx-5 justify-content-center">
+            <div class="col-lg-11 col-xl-9 col-xxl-8">
+                <!-- Project Card 1-->
+                <div class="card overflow-hidden shadow rounded-4 border-0 mb-5">
+                    <div class="card-body p-0">
+                        <form method="post">
+                            <input type="hidden" class="form-control" asp-for="Email" value="@ViewBag.v" />
+
+
+                            <div class="p-5">
+                                <h3 class="text-center">Hesabınızı aktifleştirmek için mailinize gelen onay kodunu giriniz</h3>
+
+                                <div class="row justify-content-center">
+                                    <div class="col-md-4">
+                                        <br>
+                                        <input class="form-control" asp-for="ConfirmCode" type="text" maxlength="6">
+                                        @if (!string.IsNullOrEmpty(ViewData.ModelState["ConfirmCode"]?.Errors?.FirstOrDefault()?.ErrorMessage))
+                                        {
+                                            <span class="error" style="color:red;font-family:Arial;">@Html.Raw(ViewData.ModelState["ConfirmCode"].Errors.FirstOrDefault().ErrorMessage)</span>
+                                        }
+                                    </div>
+                                </div>
+
+
+                                <div class="d-grid col-6 mx-auto mt-5">
+                                    <button class="btn btn-primary" type="submit">Hesabı aktifleştir</button>
+                                </div>
+
+                            </div>
+                        </form>
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+</section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var userNameInput = document.querySelector('[name="UserName"]');
+        var storedUserName = localStorage.getItem('userName');
+        if (userNameInput && storedUserName) {
+            userNameInput.value = storedUserName;
+        }
+        userNameInput.addEventListener('input', function () {
+            localStorage.setItem('userName', this.value);
+        });
+    });
+</script>

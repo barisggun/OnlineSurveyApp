@@ -1,0 +1,39 @@
+﻿@using OnlineSurveyApp.EntityLayer.Entities;
+@model List<ScoreList>
+
+@{
+    ViewData["Title"] = "ScoreTable";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<section class="py-5">
+    <div class="container px-5 mb-5">
+        <div class="text-center mb-5">
+            <h5 class="display-12 fw-bolder mb-0"><span class="text-gradient d-inline">@ViewBag.TestId numaralı testin skor tablosu</span></h5>
+        </div>
+        <div class="row gx-5 justify-content-center">
+            <div class="col-lg-11 col-xl-9 col-xxl-8">
+                <!-- Project Card 2-->
+                <div class="card overflow-hidden shadow rounded-4 border-0">
+                    <div class="card-body p-0">
+                        <div class="d-flex align-items-center">
+                            <div class="p-5">
+                                <h2 class="fw-bolder">Skor Tablosu</h2>
+                                <small>Test tamamlandıkça isimler burada gözükecektir</small>
+                                <br>
+                                <br>
+                                <ol class="list-group list-group-numbered">
+                                    @foreach (var score in Model)
+                                    {
+                                        <li class="list-group-item">@score.AppUser.Name @score.AppUser.Surname &nbsp; <span class="badge text-bg-success"> @score.Score </span></li>
+                                    }
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

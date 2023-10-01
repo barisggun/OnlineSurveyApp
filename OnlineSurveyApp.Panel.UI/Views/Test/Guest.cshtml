@@ -1,0 +1,53 @@
+﻿@using OnlineSurveyApp.EntityLayer.Entities;
+@model Guest
+
+@{
+    ViewData["Title"] = "GuestCreate";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<section class="py-5">
+    <div class="container px-5 mb-5">
+        <div class="text-center mb-5">
+            <h5 class="display-12 fw-bolder mb-0"><span class="text-gradient d-inline">Test oluştur</span></h5>
+
+        </div>
+        <div class="row gx-5 justify-content-center">
+            <div class="col-lg-11 col-xl-9 col-xxl-8">
+                <!-- Project Card 1-->
+                <div class="card overflow-hidden shadow rounded-4 border-0 mb-5">
+                    <div class="card-body p-0">
+
+                        <div class="p-5">
+                            <h6 class="text-center"></h6>
+                            Üye değilseniz<br><br>
+
+                            <div class="alert alert-warning" role="alert">
+                                &#x2022; 4 soruluk bir anket oluşturabilirsiniz
+                                <br>
+                                &#x2022; Bu anketi de sistemde tanımlı 10 soru üzerinden seçim yaparak oluşturabilirsiniz
+                                <br>
+                                &#x2022; Oluşturduğunuz anketi en fazla 5 kişiye gönderebilirsiniz
+                                <br><br>
+                                <div class="d-grid col-6 mx-auto">
+                                    <a asp-controller="Account" asp-action="SignUp" type="button" class="btn btn-primary btn-sm">Üye ol</a>
+                                </div>
+                            
+                            </div>
+                            <br>
+                            <form method="post">
+                                <div class="d-grid col-6 mx-auto mt-5">
+                                    <div class="mb-3">
+                                        <!-- <label for="exampleFormControlInput1" class="form-label"></label> -->
+                                        <input asp-for="Name" type="text" class="form-control mb-4" id="exampleFormControlInput1" placeholder="Adınız">
+                                    </div>
+                                    <button class="btn btn-primary" type="submit">Test oluşturmaya başla</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,73 @@
+﻿@model CreateQuestionViewModel
+
+@{
+    ViewData["Title"] = "CreateQuestion";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<section class="py-5">
+    <div class="container px-5 mb-5">
+        <div class="text-center mb-5">
+            <h5 class="display-12 fw-bolder mb-0"><span class="text-gradient d-inline">Soru Ekle</span></h5>
+
+        </div>
+        <div class="row gx-5 justify-content-center">
+            <div class="col-lg-11 col-xl-9 col-xxl-8">
+
+                <div class="card overflow-hidden shadow rounded-4 border-0 mb-5">
+                    <div class="card-body p-0">
+                        <form method="post"> 
+                        <div class="p-5">
+                            <h6 class="text-center"></h6>>
+                                Test sorusunu giriniz<br><br>
+                                <div class="mb-3">
+                                    <input asp-for="Text"type="text" class="form-control mb-4" id="exampleFormControlInput1" placeholder="Soru başlığı">
+                                </div>
+                                <p>Cevapları giriniz</p>
+                                
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1">A</span>
+                                    <input asp-for="AnswerTexts[0]" type="text" class="form-control" aria-label="Text input with checkbox">
+                                </div>
+
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1">B</span>
+                                    <input asp-for="AnswerTexts[1]" type="text" class="form-control" aria-label="Text input with checkbox">
+                                </div>
+
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1">C</span>
+                                    <input asp-for="AnswerTexts[2]" type="text" class="form-control" aria-label="Text input with checkbox">
+                                </div>
+
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1">D</span>
+                                    <input asp-for="AnswerTexts[3]" type="text" class="form-control" aria-label="Text input with checkbox">
+                                </div>
+
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1">E</span>
+                                    <input asp-for="AnswerTexts[4]" type="text" class="form-control" aria-label="Text input with checkbox">
+
+                                </div>
+                                <br>
+
+                                <div class="d-grid col-6 mx-auto mt-3">
+                                    <button class="btn btn-primary" type="submit">Soru oluştur</button>
+                                    <br>
+                                    <a asp-controller="Admin" asp-action="QuestionList" class="btn btn-primary">Soru listesi</a>
+                                </div>
+                                <br>
+                                <br>
+                                <div class="alert alert-warning" role="alert">
+                                    Kullanıcıların oluşturduğu sorular yönetici onayından sonra sisteme eklenecektir.
+                                    Yolladığınız soruları takip etmek için <a href="questionapprovaluser.html">tıklayınız.</a>
+                                </div>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+</section>
+

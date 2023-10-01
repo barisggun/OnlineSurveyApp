@@ -1,0 +1,53 @@
+﻿@using OnlineSurveyApp.EntityLayer.Entities;
+@model List<Question>
+
+@{
+    ViewData["Title"] = "QuestionApproval";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<section class="py-5">
+    <div class="container px-5 mb-5">
+        <div class="text-center mb-5">
+            <h5 class="display-12 fw-bolder mb-0"><span class="text-gradient d-inline">Onay bekleyen sorular</span></h5>
+        </div>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Soru</th>
+                    <th scope="col">Onayla</th>
+                    <th scope="col">Sil</th>
+                    <th scope="col">Durum</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr>
+                    @foreach (var item in Model)
+                    {
+                        <th scope="row">@item.ID</th>
+                        <td>@item.Text</td>
+                        <td><a href="/Admin/ApproveQuestion/@item.ID" class="btn btn-primary btn-sm">Onayla</a></td>
+                        <td><a href="/Admin/DeleteQuestion/@item.ID" class="btn btn-danger btn-sm">Sil</a></td>
+                        <td>@if(@item.Status == false)
+                            {
+                                <text>Onaylanmadı</text>
+                            }
+                            else
+                            {
+                                <text>Onaylandı</text>
+                            }
+
+                        </td>
+                    }
+                </tr>
+
+            </tbody>
+        </table>
+        <br>
+        <a href="" class="btn btn-primary me-2">Yeni soru ekle</a>
+        <a href="/Admin/QuestionList/" class="btn btn-primary">Soru listesi</a>
+    </div>
+</section>

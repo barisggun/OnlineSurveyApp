@@ -1,0 +1,42 @@
+﻿@model TestCompletedViewModel
+
+@{
+    ViewData["Title"] = "TestCompleted";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<section class="py-5">
+    <div class="container px-5 mb-5">
+        <div class="text-center mb-5">
+            <h5 class="display-12 fw-bolder mb-0"><span class="text-gradient d-inline">Testi bitirdin!</span></h5>
+
+        </div>
+        <div class="row gx-5 justify-content-center">
+            <div class="col-lg-11 col-xl-9 col-xxl-8">
+                <!-- Project Card 1-->
+                <div class="card overflow-hidden shadow rounded-4 border-0 mb-5">
+                    <div class="card-body p-0">
+
+                        <div class="p-5">
+                            <h5 class="text-center">Skor: 
+                                @if (Model.Score != null && Model.Score != 0)
+                                {
+                                     @Model.Score;
+                                }
+                                else
+                                {
+                                    @Model.GuestScore;
+                                }
+                                </h5>
+                        </div>
+                    </div>
+                </div>
+
+                @await Component.InvokeAsync("_ScoreList", ViewBag.TestId)
+
+
+            </div>
+        </div>
+    </div>
+</section>
+
