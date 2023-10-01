@@ -155,8 +155,22 @@ namespace OnlineSurveyApp.Panel.UI.Controllers
             
             var guestId = HttpContext.Session.GetInt32("GuestId");
             
-            var testId = HttpContext.Session.GetInt32(TestIdSessionKey) ?? 0; 
+            var testId = HttpContext.Session.GetInt32(TestIdSessionKey) ?? 0;
 
+            var test = context.Tests.FirstOrDefault(t => t.ID == testId);
+
+            if (test != null && test.GuestId != null)
+            {
+                var numberOfResponses = context.ScoreLists
+                    .Count(sl => sl.TestId == testId && sl.GuestId != null);
+
+                if (numberOfResponses >= 5)
+                {
+                    // Eğer 5 veya daha fazla kişi cevapladıysa, FullCapacity aksiyonuna yönlendir
+                    return RedirectToAction("FullCapacity");
+                }
+
+            }
 
             if (guestId != null)
             {
