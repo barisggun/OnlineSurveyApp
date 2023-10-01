@@ -23,11 +23,11 @@
                 </tr>
             </thead>
             <tbody>
-
-                <tr>
-                    @foreach (var item in Model)
+                                    @foreach (var item in Model)
                     {
-                        <th scope="row">@item.ID</th>
+                <tr>
+
+                        <td scope="row">@item.ID</td>
                         <td>@item.Text</td>
                         <td><a href="/Admin/ApproveQuestion/@item.ID" class="btn btn-primary btn-sm">Onayla</a></td>
                         <td><a href="/Admin/DeleteQuestion/@item.ID" class="btn btn-danger btn-sm">Sil</a></td>
@@ -41,9 +41,9 @@
                             }
 
                         </td>
-                    }
+                 
                 </tr>
-
+                }
             </tbody>
         </table>
         <br>

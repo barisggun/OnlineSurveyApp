@@ -111,7 +111,7 @@ namespace OnlineSurveyApp.Panel.UI.Controllers
                 context.Questions.Add(question);
                 context.SaveChanges();
 
-                return RedirectToAction("QuestionList", "Admin");
+                return RedirectToAction("Index","Homepage");
             }
             return View(m);
         }

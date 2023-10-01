@@ -52,7 +52,7 @@ namespace OnlineSurveyApp.Panel.UI.Controllers
                     return View();
                 }
             }
-            return RedirectToAction("Test", testId);
+            return RedirectToAction("TestNotFound");
         }
 
         [Route("Test/{testId}")]
@@ -137,13 +137,14 @@ namespace OnlineSurveyApp.Panel.UI.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("ERROR");
+                    return RedirectToAction("Index", new { testId = testId });
+
                 }
 
             }
             //end
 
-            return View();
+            return RedirectToAction("TestNotFound");
 
         }
 
@@ -350,7 +351,11 @@ namespace OnlineSurveyApp.Panel.UI.Controllers
             return View();
         }
 
+        public IActionResult TestNotFound()
+        {
 
+            return View();
+        }
 
 
 
