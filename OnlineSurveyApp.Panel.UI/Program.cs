@@ -81,6 +81,9 @@ app.UseAuthentication();
 app.UseSession();
 //
 
+//404 page
+app.UseStatusCodePagesWithReExecute("/Error/Error404", "?code={0}");
+
 app.UseRouting();
 
 app.UseAuthorization();
