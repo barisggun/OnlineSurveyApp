@@ -17,11 +17,11 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<Context>();
 builder.Services.AddIdentity<AppUser, AppRole>(x =>
 {
-    x.Password.RequireDigit = true;         // Þifre rakam içermelidir.
-    x.Password.RequireLowercase = true;     // Þifre küçük harf içermelidir.
-    x.Password.RequireUppercase = true;     // Þifre büyük harf içermelidir.
-    x.Password.RequireNonAlphanumeric = true; // Þifre özel karakter içermelidir.
-    x.Password.RequiredLength = 8;           // Þifreniz en az 8 karakter olmalýdýr.
+    x.Password.RequireDigit = true;      
+    x.Password.RequireLowercase = true;     
+    x.Password.RequireUppercase = true;     
+    x.Password.RequireNonAlphanumeric = true; 
+    x.Password.RequiredLength = 8;           
 }).AddEntityFrameworkStores<Context>();
 //Identity End
 
@@ -93,11 +93,10 @@ app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllerRoute(
         name: "TestStart",
-        pattern: "Test/Start/{testId}", // Define the route template
+        pattern: "Test/Start/{testId}", 
         defaults: new { controller = "Test", action = "Start" }
     );
 
-    // Add other endpoints as needed
 });
 
 
