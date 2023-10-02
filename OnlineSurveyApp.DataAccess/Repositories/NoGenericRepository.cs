@@ -11,45 +11,84 @@ namespace OnlineSurveyApp.DataAccess.Repositories
 {
     public class NoGenericRepository<T> : IGenericDal<T> where T : class
     {
+        //public void Delete(T t)
+        //{
+        //    using (var context = new Context())
+        //    {
+        //        context.Remove(t);
+        //        context.SaveChanges();
+        //    }
+        //}
+
+        //public T GetById(int id)
+        //{
+        //    using var c = new Context();
+        //    return c.Set<T>().Find(id);
+        //}
+
+        //public void Create(T t)
+        //{
+        //    using var c = new Context();
+        //    c.Add(t);
+        //    c.SaveChanges();
+        //}
+
+        //public void Update(T t)
+        //{
+        //    using var c = new Context();
+        //    c.Update(t);
+        //    c.SaveChanges();
+        //}
+
+
+        //public List<T> GetAll()
+        //{
+        //    using var c = new Context();
+        //    return c.Set<T>().ToList();
+        //}
+
+        //public List<T> GetAll(Expression<Func<T, bool>> filter)
+        //{
+        //    using var c = new Context();
+        //    return c.Set<T>().Where(filter).ToList();
+        //}
+        Context c = new Context();
+
         public void Delete(T t)
         {
-            using (var context = new Context())
-            {
-                context.Remove(t);
-                context.SaveChanges();
-            }
+            c.Remove(t);
+            c.SaveChanges();
         }
 
-        public T GetById(int id)
+        public T GetByID(int id)
         {
-            using var c = new Context();
+
             return c.Set<T>().Find(id);
         }
 
-        public void Create(T t)
+        public void Insert(T t)
         {
-            using var c = new Context();
+
             c.Add(t);
             c.SaveChanges();
         }
 
         public void Update(T t)
         {
-            using var c = new Context();
+
             c.Update(t);
             c.SaveChanges();
         }
 
-
-        public List<T> GetAll()
+        public List<T> GetList()
         {
-            using var c = new Context();
+
             return c.Set<T>().ToList();
         }
 
-        public List<T> GetAll(Expression<Func<T, bool>> filter)
+        public List<T> GetListByFilter(Expression<Func<T, bool>> filter)
         {
-            using var c = new Context();
+
             return c.Set<T>().Where(filter).ToList();
         }
     }

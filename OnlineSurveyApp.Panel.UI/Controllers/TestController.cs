@@ -41,7 +41,7 @@ namespace OnlineSurveyApp.Panel.UI.Controllers
         [HttpPost]
         public IActionResult Guest(Guest guest)
         {
-            gm.Create(guest);
+            gm.TAdd(guest);
             HttpContext.Session.SetInt32("guestId", guest.ID);
             return RedirectToAction("Create"/*, new { guestId = guest.ID }*/);
         }
@@ -66,11 +66,11 @@ namespace OnlineSurveyApp.Panel.UI.Controllers
 
             if (guestId != 0)
             {
-               viewModel.Questions = qm.GetAll().Where(x => x.Status == true).Take(10).ToList();
+               viewModel.Questions = qm.TGetList().Where(x => x.Status == true).Take(10).ToList();
             }
             else
             {
-                viewModel.Questions = qm.GetAll().Where(x => x.Status == true).ToList();
+                viewModel.Questions = qm.TGetList().Where(x => x.Status == true).ToList();
             }
 
             viewModel.CurrentQuestionNumber = currentQuestionNumber;

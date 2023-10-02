@@ -18,29 +18,29 @@ namespace OnlineSurveyApp.BusinessLayer.Concrete
             _scoreListDal = scoreListDal;
         }
 
-        public void Create(ScoreList scoreList)
+        public void TAdd(ScoreList t)
         {
-            _scoreListDal.Create(scoreList);    
+            _scoreListDal.Insert(t);
         }
 
-        public void Delete(ScoreList scoreList)
+        public void TDelete(ScoreList t)
         {
-            _scoreListDal.Delete(scoreList);    
+            _scoreListDal.Delete(t);
         }
 
-        public List<ScoreList> GetAll()
+        public ScoreList TGetById(int id)
         {
-            return _scoreListDal.GetAll();
+            return _scoreListDal.GetByID(id);
         }
 
-        public ScoreList GetById(int id)
+        public List<ScoreList> TGetList()
         {
-            return _scoreListDal.GetById(id);
+            return _scoreListDal.GetList();
         }
 
-        public void Update(ScoreList scoreList)
+        public void TUpdate(ScoreList t)
         {
-            _scoreListDal.Update(scoreList);
+            _scoreListDal.Update(t);
         }
     }
 }

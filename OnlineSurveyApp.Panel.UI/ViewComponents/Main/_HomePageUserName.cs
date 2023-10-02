@@ -14,7 +14,7 @@ namespace OnlineSurveyApp.Panel.UI.ViewComponents.Homepage
         {
             var username = User.Identity.Name;
             var userID = c.Users.Where(x => x.UserName == username).Select(y => y.Id).FirstOrDefault();
-            var values = userManager.GetById(userID);
+            var values = userManager.TGetById(userID);
             return View(values);
 
         }

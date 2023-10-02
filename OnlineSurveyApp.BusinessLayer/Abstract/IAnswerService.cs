@@ -7,13 +7,16 @@ using System.Threading.Tasks;
 
 namespace OnlineSurveyApp.BusinessLayer.Abstract
 {
-    public interface IAnswerService
+    public interface IAnswerService : IGenericService<Answer>
     {
-        Answer GetById(int id);
-        List<Answer> GetAll();
-        void Create(Answer answer);
-        void Update(Answer answer);
-        void Delete(Answer answer);
-        List<Answer> GetQuestionWithAnswers(int questionId);
+
+
+
+        //Answer GetById(int id);
+        //List<Answer> GetAll();
+        //void Create(Answer answer);
+        //void Update(Answer answer);
+        //void Delete(Answer answer);
+        //List<Answer> GetQuestionWithAnswers(int questionId);
     }
 }

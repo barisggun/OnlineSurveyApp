@@ -20,30 +20,29 @@ namespace OnlineSurveyApp.BusinessLayer.Concrete
             _questionDal = questionDal;
         }
 
-        public void Create(Question question)
+        public void TAdd(Question t)
         {
-            _questionDal.Create(question);
+            _questionDal.Insert(t);
         }
 
-        public void Delete(Question question)
+        public void TDelete(Question t)
         {
-            _questionDal.Delete(question);
+            _questionDal.Delete(t);
         }
 
-        public List<Question> GetAll()
+        public Question TGetById(int id)
         {
-            return _questionDal.GetAll();
+            return _questionDal.GetByID(id);
         }
 
-        public Question GetById(int id)
+        public List<Question> TGetList()
         {
-            return _questionDal.GetById(id);
+            return _questionDal.GetList();
         }
 
-        public void Update(Question question)
+        public void TUpdate(Question t)
         {
-            _questionDal.Update(question);
+            _questionDal.Update(t);
         }
-
     }
 }

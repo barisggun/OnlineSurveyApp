@@ -7,12 +7,8 @@ using System.Threading.Tasks;
 
 namespace OnlineSurveyApp.BusinessLayer.Abstract
 {
-    public interface IGuestService
+    public interface IGuestService : IGenericService<Guest>
     {
-        Guest GetById(int id);
-        List<Guest> GetAll();
-        void Create(Guest guest);
-        void Update(Guest guest);
-        void Delete(Guest guest);
+
     }
 }

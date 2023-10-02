@@ -7,12 +7,8 @@ using System.Threading.Tasks;
 
 namespace OnlineSurveyApp.BusinessLayer.Abstract
 {
-    public interface IScoreListService
+    public interface IScoreListService : IGenericService<ScoreList>
     {
-        ScoreList GetById(int id);
-        List<ScoreList> GetAll();
-        void Create(ScoreList scoreList);
-        void Update(ScoreList scoreList);
-        void Delete(ScoreList scoreList);
+
     }
 }

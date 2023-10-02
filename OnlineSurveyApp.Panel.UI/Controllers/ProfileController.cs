@@ -26,7 +26,7 @@ namespace OnlineSurveyApp.Panel.UI.Controllers
         [Route("Index/{userId}")]
         public IActionResult Index(int userId)
         {
-            var user = userManager.GetById(userId);
+            var user = userManager.TGetById(userId);
             ViewBag.Name = user.Name + " " +user.Surname;
             ViewBag.UserId = user.Id;
             return View();
@@ -61,14 +61,14 @@ namespace OnlineSurveyApp.Panel.UI.Controllers
         [Route("DeleteTest/{testId}")]
         public IActionResult DeleteTest(int testId)
         {        
-            var test = tm.GetById(testId);
+            var test = tm.TGetById(testId);
 
             var scoreLists = context.ScoreLists.Where(sl => sl.TestId == testId).ToList();
 
             context.ScoreLists.RemoveRange(scoreLists);
             context.SaveChanges();
 
-            tm.Delete(test);
+            tm.TDelete(test);
 
             return RedirectToAction("TestList");
         }

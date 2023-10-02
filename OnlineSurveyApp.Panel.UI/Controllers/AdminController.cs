@@ -68,8 +68,8 @@ namespace OnlineSurveyApp.Panel.UI.Controllers
 
         public IActionResult DeleteQuestion(int id)
         {
-            var question = qm.GetById(id);
-            qm.Delete(question);
+            var question = qm.TGetById(id);
+            qm.TDelete(question);
 
             return RedirectToAction("QuestionList","Admin");
         }
@@ -82,11 +82,11 @@ namespace OnlineSurveyApp.Panel.UI.Controllers
 
         public IActionResult ApproveQuestion(int id)
         {
-            var question = qm.GetById(id);  
+            var question = qm.TGetById(id);  
             if (question != null)
             {
                 question.Status = true;
-                qm.Update(question);
+                qm.TUpdate(question);
             }
             return RedirectToAction("QuestionApproval", "Admin");
         }

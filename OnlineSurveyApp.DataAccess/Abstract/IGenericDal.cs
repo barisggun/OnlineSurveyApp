@@ -9,11 +9,19 @@ namespace OnlineSurveyApp.DataAccess.Abstract
 {
     public interface IGenericDal<T> where T : class
     {
-        T GetById(int id);
-        List<T> GetAll();
-        List<T> GetAll(Expression<Func<T, bool>> filter);    
-        void Create(T entity);  
-        void Update(T entity);  
-        void Delete(T entity);
+
+        void Insert(T t);
+        void Delete(T t);
+        void Update(T t);
+        List<T> GetList();
+        T GetByID(int id);
+        List<T> GetListByFilter(Expression<Func<T, bool>> filter);
+
+        //T GetById(int id);
+        //List<T> GetAll();
+        //List<T> GetAll(Expression<Func<T, bool>> filter);    
+        //void Create(T entity);  
+        //void Update(T entity);  
+        //void Delete(T entity);
     }
 }

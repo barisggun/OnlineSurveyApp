@@ -339,7 +339,7 @@ namespace OnlineSurveyApp.Panel.UI.Controllers
         [Route("Guest/{testId}")]
         public IActionResult Guest(Guest guest, int testId)
         {
-            gm.Create(guest);
+            gm.TAdd(guest);
             int guestId = guest.ID;
             HttpContext.Session.SetInt32("GuestId", guestId);
             return RedirectToAction("Test", new { testId });
