@@ -52,8 +52,7 @@ namespace OnlineSurveyApp.Panel.UI.Controllers
                     question.Answers.Add(answer);
                 }           
 
-                context.Questions.Add(question);
-                context.SaveChanges();
+                qm.TAdd(question);
 
                 return RedirectToAction("QuestionList","Admin");
             }

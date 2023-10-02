@@ -167,7 +167,7 @@ namespace OnlineSurveyApp.Panel.UI.Controllers
 
                 if (numberOfResponses >= 5)
                 {
-                    // Eğer 5 veya daha fazla kişi cevapladıysa, FullCapacity aksiyonuna yönlendir
+                    
                     return RedirectToAction("FullCapacity");
                 }
 

@@ -15,6 +15,7 @@ namespace OnlineSurveyApp.Panel.UI.Controllers
     {
         UserManager userManager = new UserManager(new EfUserRepository());
         TestManager tm = new TestManager(new EfTestRepository());
+        QuestionManager qm = new QuestionManager(new EfQuestionRepository());
         Context context = new Context();
         private readonly UserManager<AppUser> _userManager;
 
@@ -108,8 +109,7 @@ namespace OnlineSurveyApp.Panel.UI.Controllers
                     question.Answers.Add(answer);
                 }
 
-                context.Questions.Add(question);
-                context.SaveChanges();
+                qm.TAdd(question);
 
                 return RedirectToAction("Index","Homepage");
             }
