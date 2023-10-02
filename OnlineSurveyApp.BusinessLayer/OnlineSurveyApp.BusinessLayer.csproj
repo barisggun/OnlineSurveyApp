@@ -15,8 +15,4 @@
     <ProjectReference Include="..\OnlineSurveyApp.EntityLayer\OnlineSurveyApp.EntityLayer.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="ValidationRules\" />
-  </ItemGroup>
-
 </Project>

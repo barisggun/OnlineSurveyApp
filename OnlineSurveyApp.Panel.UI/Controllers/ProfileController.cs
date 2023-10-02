@@ -6,6 +6,9 @@ using OnlineSurveyApp.DataAccess.Concrete;
 using OnlineSurveyApp.DataAccess.EntityFramework;
 using OnlineSurveyApp.EntityLayer.Entities;
 using OnlineSurveyApp.Panel.UI.Models;
+using OnlineSurveyApp.Panel.UI.ValidationRules;
+using System;
+//using System.ComponentModel.DataAnnotations;
 
 namespace OnlineSurveyApp.Panel.UI.Controllers
 {
@@ -86,8 +89,10 @@ namespace OnlineSurveyApp.Panel.UI.Controllers
         [Route("CreateQuestion")]
         public IActionResult CreateQuestion(CreateQuestionViewModel m)
         {
+            var validator = new CreateQuestionValidator();
+            var validationResult = validator.Validate(m);
 
-            if (ModelState.IsValid)
+            if (validationResult.IsValid)
             {
                 string questionText = m.Text;
                 List<string> answerTexts = m.AnswerTexts;
@@ -112,6 +117,13 @@ namespace OnlineSurveyApp.Panel.UI.Controllers
                 qm.TAdd(question);
 
                 return RedirectToAction("Index","Homepage");
+            }
+            else
+            {
+                foreach (var item in validationResult.Errors)
+                {
+                    ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
+                }
             }
             return View(m);
         }
