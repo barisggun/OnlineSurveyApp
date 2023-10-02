@@ -22,6 +22,7 @@
                                 Test sorusunu giriniz<br><br>
                                 <div class="mb-3">
                                     <input asp-for="Text"type="text" class="form-control mb-4" id="exampleFormControlInput1" placeholder="Soru başlığı">
+                                    <span class="text-danger" asp-validation-for="Text"></span>
                                 </div>
                                 <p>Cevapları giriniz</p>
                                 
@@ -29,27 +30,31 @@
                                     <span class="input-group-text" id="basic-addon1">A</span>
                                     <input asp-for="AnswerTexts[0]" type="text" class="form-control" aria-label="Text input with checkbox">
                                 </div>
+                                <span class="text-danger" asp-validation-for="AnswerTexts[0]"></span>
 
                                 <div class="input-group mb-3">
                                     <span class="input-group-text" id="basic-addon1">B</span>
                                     <input asp-for="AnswerTexts[1]" type="text" class="form-control" aria-label="Text input with checkbox">
                                 </div>
+                                <span class="text-danger" asp-validation-for="AnswerTexts[1]"></span>
 
                                 <div class="input-group mb-3">
                                     <span class="input-group-text" id="basic-addon1">C</span>
                                     <input asp-for="AnswerTexts[2]" type="text" class="form-control" aria-label="Text input with checkbox">
                                 </div>
+                                <span class="text-danger" asp-validation-for="AnswerTexts[2]"></span>
 
                                 <div class="input-group mb-3">
                                     <span class="input-group-text" id="basic-addon1">D</span>
                                     <input asp-for="AnswerTexts[3]" type="text" class="form-control" aria-label="Text input with checkbox">
                                 </div>
+                                <span class="text-danger" asp-validation-for="AnswerTexts[3]"></span>
 
                                 <div class="input-group mb-3">
                                     <span class="input-group-text" id="basic-addon1">E</span>
                                     <input asp-for="AnswerTexts[4]" type="text" class="form-control" aria-label="Text input with checkbox">
-
                                 </div>
+                                <span class="text-danger" asp-validation-for="AnswerTexts[4]"></span>
                                 <br>
 
                                 <div class="d-grid col-6 mx-auto mt-3">
