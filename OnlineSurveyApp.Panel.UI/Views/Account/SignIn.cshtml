@@ -27,6 +27,7 @@
                                     <div class="mb-3">
                                         <label for="exampleFormControlInput1" class="form-label">E-Posta Adresi</label>
                                         <input type="email" class="form-control" id="exampleFormControlInput1" asp-for="@Model.Email" placeholder="name@example.com">
+                                            <span asp-validation-for="@Model.Email" class="text-danger"></span>
                                     </div>
 
                                     <div class="mb-3">
