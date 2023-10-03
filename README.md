@@ -38,6 +38,7 @@ I am responsible for all stages of backend and frontend development.
 - FLUENT VALIDATION (For create question screen)
 
 ## Future features
+- For security, I will move the Sql Server information from context to appsettings.
 - To prevent possible requests, keep the creation date of the test as Unix and set a limit
 - Moving the database methods defined in the Controller to the business and data access layer
 - Using API for instant control of the selected question
