@@ -9,6 +9,7 @@ namespace OnlineSurveyApp.DataAccess.Abstract
 {
     public interface IQuestionDal : IGenericDal<Question>
     {
-       
+        public List<Question> StatusTrueQuestions();
+        public List<Question> StatusFalseQuestions();
     }
 }

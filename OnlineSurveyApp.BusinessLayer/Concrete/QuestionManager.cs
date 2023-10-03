@@ -20,6 +20,16 @@ namespace OnlineSurveyApp.BusinessLayer.Concrete
             _questionDal = questionDal;
         }
 
+        public List<Question> StatusFalseQuestions()
+        {
+            return _questionDal.StatusFalseQuestions();
+        }
+
+        public List<Question> StatusTrueQuestions()
+        {
+            return _questionDal.StatusTrueQuestions();
+        }
+
         public void TAdd(Question t)
         {
             _questionDal.Insert(t);

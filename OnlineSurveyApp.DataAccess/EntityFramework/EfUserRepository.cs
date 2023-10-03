@@ -12,5 +12,10 @@ namespace OnlineSurveyApp.DataAccess.EntityFramework
 {
     public class EfUserRepository : NoGenericRepository<AppUser>, IUserDal
     {
+        Context c = new Context();
+        public int GetUserIdByUserName(string username)
+        {
+            return c.Users.Where(x => x.UserName == username).Select(y => y.Id).FirstOrDefault();
+        }
     }
 }

@@ -19,6 +19,7 @@ namespace OnlineSurveyApp.Panel.UI.Controllers
         UserManager userManager = new UserManager(new EfUserRepository());
         TestManager tm = new TestManager(new EfTestRepository());
         QuestionManager qm = new QuestionManager(new EfQuestionRepository());
+        ScoreListManager sm = new ScoreListManager(new EfScoreListRepository());
         Context context = new Context();
         private readonly UserManager<AppUser> _userManager;
 
@@ -39,27 +40,16 @@ namespace OnlineSurveyApp.Panel.UI.Controllers
         [Route("TestList/{userId}")]
         public IActionResult TestList(int userId)
         { 
-            var userTests = context.Tests.Where(t=> t.AppUserId == userId).ToList();
+            var userTests = tm.TestList(userId);    
             return View(userTests);
         }
 
         [Route("ScoreTable/{testId}")]
         public IActionResult ScoreTable(int testId)
         {
-            
-            var scores = context.ScoreLists
-                .Where(sl => sl.TestId == testId)
-                .OrderByDescending(sl => sl.Score)
-                .ToList();
-
-            foreach (var score in scores)
-            {
-                score.AppUser = context.Users.FirstOrDefault(u => u.Id == score.AppUserId);
-            }
-
             ViewBag.TestId = testId;
 
-            return View(scores);
+            return View();
         }
 
         [Route("DeleteTest/{testId}")]
@@ -67,14 +57,16 @@ namespace OnlineSurveyApp.Panel.UI.Controllers
         {        
             var test = tm.TGetById(testId);
 
-            var scoreLists = context.ScoreLists.Where(sl => sl.TestId == testId).ToList();
+            sm.RemoveTestWithScoreList(testId);
 
-            context.ScoreLists.RemoveRange(scoreLists);
-            context.SaveChanges();
+            //var scoreLists = context.ScoreLists.Where(sl => sl.TestId == testId).ToList();
+
+            //context.ScoreLists.RemoveRange(scoreLists);
+            //context.SaveChanges();
 
             tm.TDelete(test);
 
-            return RedirectToAction("TestList");
+            return RedirectToAction("TestList", new { userId = test.AppUserId });
         }
 
 

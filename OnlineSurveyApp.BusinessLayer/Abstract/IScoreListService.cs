@@ -9,6 +9,7 @@ namespace OnlineSurveyApp.BusinessLayer.Abstract
 {
     public interface IScoreListService : IGenericService<ScoreList>
     {
-
+        public List<ScoreList> Scores(int testId);
+        public List<ScoreList> RemoveTestWithScoreList(int testId);
     }
 }

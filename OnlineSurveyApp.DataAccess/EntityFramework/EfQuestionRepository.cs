@@ -14,6 +14,15 @@ namespace OnlineSurveyApp.DataAccess.EntityFramework
 {
     public class EfQuestionRepository : GenericRepository<Question>, IQuestionDal
     {
+        Context c = new Context();
+        public List<Question> StatusTrueQuestions()
+        {
+            return c.Questions.Where(x => x.Status == true).ToList();
+        }
 
+        public List<Question> StatusFalseQuestions()
+        {
+            return c.Questions.Where(x => x.Status == false).ToList();
+        }
     }
 }

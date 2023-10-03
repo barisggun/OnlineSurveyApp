@@ -9,6 +9,7 @@ namespace OnlineSurveyApp.BusinessLayer.Abstract
 {
     public interface IQuestionService : IGenericService<Question>
     {
-
+        public List<Question> StatusTrueQuestions();
+        public List<Question> StatusFalseQuestions();
     }
 }

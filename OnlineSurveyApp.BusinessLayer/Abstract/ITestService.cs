@@ -9,6 +9,6 @@ namespace OnlineSurveyApp.BusinessLayer.Abstract
 {
     public interface ITestService : IGenericService<Test>
     {
-
+        public List<Test> TestList(int userId);
     }
 }

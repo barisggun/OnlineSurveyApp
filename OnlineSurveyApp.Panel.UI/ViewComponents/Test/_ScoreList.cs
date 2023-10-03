@@ -1,17 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OnlineSurveyApp.BusinessLayer.Concrete;
 using OnlineSurveyApp.DataAccess.Concrete;
+using OnlineSurveyApp.DataAccess.EntityFramework;
 
 namespace OnlineSurveyApp.Panel.UI.ViewComponents.Test
 {
     public class _ScoreList : ViewComponent
     {
         Context context = new Context();
+        ScoreListManager sm = new ScoreListManager(new EfScoreListRepository());
         public async Task<IViewComponentResult> InvokeAsync(int testId)
         {
-            var scores = context.ScoreLists
-                .Where(sl => sl.TestId == testId)
-                .OrderByDescending(sl => sl.Score)
-                .ToList();
+            var scores = sm.Scores(testId);
 
             foreach (var score in scores)
             {

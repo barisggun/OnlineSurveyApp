@@ -9,5 +9,7 @@ namespace OnlineSurveyApp.DataAccess.Abstract
 {
     public interface ITestDal : IGenericDal<Test>
     {
+        public List<Test> TestList(int userId);
+
     }
 }

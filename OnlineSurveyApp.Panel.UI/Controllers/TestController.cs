@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure.Internal;
+using OnlineSurveyApp.BusinessLayer.Abstract;
 using OnlineSurveyApp.BusinessLayer.Concrete;
 using OnlineSurveyApp.DataAccess.Abstract;
 using OnlineSurveyApp.DataAccess.Concrete;
@@ -19,9 +20,11 @@ namespace OnlineSurveyApp.Panel.UI.Controllers
     public class TestController : Controller
     {
         Context context = new Context();
+
         QuestionManager qm = new QuestionManager(new EfQuestionRepository());
         AnswerManager am = new AnswerManager(new EfAnswerRepository());
         GuestManager gm = new GuestManager(new EfGuestRepository());
+        UserManager um = new UserManager(new EfUserRepository());
 
         private readonly UserManager<AppUser> _userManager;
         private int currentQuestionNumber;
@@ -51,7 +54,7 @@ namespace OnlineSurveyApp.Panel.UI.Controllers
         public IActionResult Create()
         {
             var username = User?.Identity?.Name;
-            var userID = context.Users.Where(x => x.UserName == username).Select(y => y.Id).FirstOrDefault();
+            var userID = um.GetUserIdByUserName(username);
             var userId = userID;
 
             var currentQuestionNumber = HttpContext.Session.GetInt32("CurrentQuestionNumber") ?? 0;
@@ -126,7 +129,7 @@ namespace OnlineSurveyApp.Panel.UI.Controllers
                 }
 
                 var username = User?.Identity?.Name;
-                var userID = context.Users.Where(x => x.UserName == username).Select(y => y.Id).FirstOrDefault();
+                var userID = um.GetUserIdByUserName(username);
                 var userId = userID;
 
                 if (username == null)
@@ -152,6 +155,7 @@ namespace OnlineSurveyApp.Panel.UI.Controllers
                         QuestionId = viewModel.SelectedQuestionId,
                         Test = testGuest
                     };
+
                     context.TestQuestions.Add(testQuestion);
 
                     context.SaveChanges();

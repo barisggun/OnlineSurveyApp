@@ -28,6 +28,11 @@ namespace OnlineSurveyApp.BusinessLayer.Concrete
             _testDal.Delete(t);
         }
 
+        public List<Test> TestList(int userId)
+        {
+            return _testDal.TestList(userId);
+        }
+
         public Test TGetById(int id)
         {
             return _testDal.GetByID(id);

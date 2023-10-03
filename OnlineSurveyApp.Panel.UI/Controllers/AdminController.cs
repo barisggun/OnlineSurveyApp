@@ -72,7 +72,7 @@ namespace OnlineSurveyApp.Panel.UI.Controllers
 
         public IActionResult QuestionList()
         {
-            var values = context.Questions.Where(x=> x.Status == true).ToList();
+            var values = qm.StatusTrueQuestions();
             return View(values);
         }
 
@@ -86,7 +86,7 @@ namespace OnlineSurveyApp.Panel.UI.Controllers
 
         public IActionResult QuestionApproval()
         {
-            var values = context.Questions.Where(x=>x.Status == false).ToList();
+            var values = qm.StatusFalseQuestions();
             return View(values);
         }
 

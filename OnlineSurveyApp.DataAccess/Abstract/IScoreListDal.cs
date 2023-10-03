@@ -9,5 +9,7 @@ namespace OnlineSurveyApp.DataAccess.Abstract
 {
     public interface IScoreListDal : IGenericDal<ScoreList>
     {
+        public List<ScoreList> Scores(int testId);
+        public List<ScoreList> RemoveTestWithScoreList(int testId);
     }
 }

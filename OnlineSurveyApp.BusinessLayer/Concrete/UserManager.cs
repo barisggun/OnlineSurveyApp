@@ -20,6 +20,11 @@ namespace OnlineSurveyApp.BusinessLayer.Concrete
             _userDal = userDal;
         }
 
+        public int GetUserIdByUserName(string username)
+        {
+            return _userDal.GetUserIdByUserName(username); 
+        }
+
         public void TAdd(AppUser t)
         {
             _userDal.Insert(t);

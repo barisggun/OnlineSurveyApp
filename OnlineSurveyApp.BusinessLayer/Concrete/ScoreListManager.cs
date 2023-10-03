@@ -18,6 +18,16 @@ namespace OnlineSurveyApp.BusinessLayer.Concrete
             _scoreListDal = scoreListDal;
         }
 
+        public List<ScoreList> RemoveTestWithScoreList(int testId)
+        {
+            return _scoreListDal.RemoveTestWithScoreList(testId);
+        }
+
+        public List<ScoreList> Scores(int testId)
+        {
+            return _scoreListDal.Scores(testId);
+        }
+
         public void TAdd(ScoreList t)
         {
             _scoreListDal.Insert(t);

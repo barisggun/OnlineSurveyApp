@@ -11,8 +11,6 @@ var builder = WebApplication.CreateBuilder(args);
 //builder.Services.AddDbContext<Context>(options =>
 //    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-
-//Identity Start
 //Identity Start
 builder.Services.AddDbContext<Context>();
 builder.Services.AddIdentity<AppUser, AppRole>(x =>
@@ -23,7 +21,6 @@ builder.Services.AddIdentity<AppUser, AppRole>(x =>
     x.Password.RequireNonAlphanumeric = true; 
     x.Password.RequiredLength = 8;           
 }).AddEntityFrameworkStores<Context>();
-//Identity End
 
 
 builder.Services.Configure<IdentityOptions>(options =>
@@ -33,8 +30,6 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.Lockout.AllowedForNewUsers = true;
 });
 //Identity End
-
-
 
 
 // Add services to the container.
@@ -60,11 +55,6 @@ builder.Services.AddAuthentication(
         x.LoginPath = "/Account/SignIn/";
     }
     );
-
-
-
-
-
 
 
 var app = builder.Build();

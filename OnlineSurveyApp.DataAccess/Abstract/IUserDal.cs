@@ -9,5 +9,6 @@ namespace OnlineSurveyApp.DataAccess.Abstract
 {
     public interface IUserDal : IGenericDal<AppUser>
     {
+        int GetUserIdByUserName(string username);
     }
 }
