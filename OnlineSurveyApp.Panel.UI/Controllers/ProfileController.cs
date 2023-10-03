@@ -59,18 +59,11 @@ namespace OnlineSurveyApp.Panel.UI.Controllers
 
             sm.RemoveTestWithScoreList(testId);
 
-            //var scoreLists = context.ScoreLists.Where(sl => sl.TestId == testId).ToList();
-
-            //context.ScoreLists.RemoveRange(scoreLists);
-            //context.SaveChanges();
-
             tm.TDelete(test);
 
             return RedirectToAction("TestList", new { userId = test.AppUserId });
         }
 
-
-        // SORU OLUŞTURMA ALANI
         [Route("CreateQuestion")]
         public IActionResult CreateQuestion()
         {

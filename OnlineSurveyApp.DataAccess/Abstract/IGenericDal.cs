@@ -17,11 +17,5 @@ namespace OnlineSurveyApp.DataAccess.Abstract
         T GetByID(int id);
         List<T> GetListByFilter(Expression<Func<T, bool>> filter);
 
-        //T GetById(int id);
-        //List<T> GetAll();
-        //List<T> GetAll(Expression<Func<T, bool>> filter);    
-        //void Create(T entity);  
-        //void Update(T entity);  
-        //void Delete(T entity);
     }
 }

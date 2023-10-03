@@ -99,7 +99,7 @@ namespace OnlineSurveyApp.Panel.UI.Controllers
 
             var currentTestId = HttpContext.Session.GetInt32(TestIdSessionKey);
 
-            if (currentQuestionNumber == 9)
+            if (currentQuestionNumber == 10)
             {
                 if (currentTestId != null)
                 {

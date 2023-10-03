@@ -21,6 +21,7 @@ namespace OnlineSurveyApp.Panel.UI.Controllers
         TestQuestionManager testQuestionManager = new TestQuestionManager(new EfTestQuestionRepository());
         TestManager tm = new TestManager(new EfTestRepository());
         GuestManager gm = new GuestManager(new EfGuestRepository());
+        UserManager um = new UserManager(new EfUserRepository());
 
         private const string TestIdSessionKey = "TestId";
         private int currentQuestionNumber;
@@ -28,7 +29,7 @@ namespace OnlineSurveyApp.Panel.UI.Controllers
         [Route("Index/{testId}")]
         public IActionResult Index(int testId)
         {
-            var test = context.Tests.Where(x => x.ID == testId).FirstOrDefault();
+            var test = tm.TGetById(testId);
 
             if (test != null)
             {
@@ -59,25 +60,19 @@ namespace OnlineSurveyApp.Panel.UI.Controllers
         public IActionResult Test(int testId)
         {
             var guestId = HttpContext.Session.GetInt32("GuestId");
-            
-            var test = context.Tests.Where(x => x.ID == testId).FirstOrDefault();
+          
+            var test = tm.TGetById(testId);/*context.Tests.Where(x => x.ID == testId).FirstOrDefault();*/
 
             var username = User?.Identity?.Name;
-            var userID = context.Users.Where(x => x.UserName == username).Select(y => y.Id).FirstOrDefault();
+            var userID = um.GetUserIdByUserName(username);
             var userId = userID;
-
 
             if (test != null)
             {
-                //var userId = test.AppUserId;
-                var userName = context.Users.Where(x => x.Id == userId).FirstOrDefault();
 
-                //var guestId = test.GuestId;
-                //var guestName = context.Guests.Where(x => x.ID == guestId).FirstOrDefault();
-
-                if (userName != null)
+                if (username != null)
                 {
-                    ViewBag.UserName = userName.Name;
+                    ViewBag.UserName = username;
                     ViewBag.TestId = testId;
 
                     var currentQuestionNumber = HttpContext.Session.GetInt32("CurrentQuestionNumber") ?? 0;
@@ -105,11 +100,11 @@ namespace OnlineSurveyApp.Panel.UI.Controllers
                     return View(); 
                 }
                 var guestName = context.Guests.Where(x => x.ID == guestId).FirstOrDefault();
+
                 if (guestName != null)
                 {
                     ViewBag.TestId = testId;
                     ViewBag.GuestName = guestName.Name;
-
 
                     var currentQuestionNumber = HttpContext.Session.GetInt32("CurrentQuestionNumber") ?? 0;
                     HttpContext.Session.SetInt32(TestIdSessionKey, testId);
@@ -132,7 +127,6 @@ namespace OnlineSurveyApp.Panel.UI.Controllers
 
                         return View(testQuestionViewModel);
                     }
-
                     return View(); 
                 }
                 else
@@ -140,25 +134,20 @@ namespace OnlineSurveyApp.Panel.UI.Controllers
                     return RedirectToAction("Index", new { testId = testId });
 
                 }
-
             }
-            //end
 
             return RedirectToAction("TestNotFound");
-
         }
-
 
         [HttpPost]
         [Route("Test/{testId}")]
         public IActionResult Test(TestQuestionViewModel testQuestionViewModel)
-        {
-            
+        {         
             var guestId = HttpContext.Session.GetInt32("GuestId");
             
             var testId = HttpContext.Session.GetInt32(TestIdSessionKey) ?? 0;
 
-            var test = context.Tests.FirstOrDefault(t => t.ID == testId);
+            var test = tm.TGetById(testId);/*context.Tests.FirstOrDefault(t => t.ID == testId);*/
 
             if (test != null && test.GuestId != null)
             {
@@ -170,37 +159,33 @@ namespace OnlineSurveyApp.Panel.UI.Controllers
                     
                     return RedirectToAction("FullCapacity");
                 }
-
             }
 
             if (guestId != null)
             {
                 var correctAnswerGuest = context.CorrectAnswers
-    .Where(ca => ca.QuestionId == testQuestionViewModel.QuestionId && ca.TestId == testId)
-    .Select(ca => ca.Correct)
-    .FirstOrDefault();
-
+                    .Where(ca => ca.QuestionId == testQuestionViewModel.QuestionId && ca.TestId == testId)
+                    .Select(ca => ca.Correct)
+                    .FirstOrDefault();
 
                 int scoreGuest = HttpContext.Session.GetInt32("UserScore") ?? 0;
-
                 
                 if (testQuestionViewModel.SelectedAnswer == correctAnswerGuest)
                 {
                     scoreGuest++;
                 }
+
                 HttpContext.Session.SetInt32("UserScore", scoreGuest);
 
                 var existingScoreGuest = context.ScoreLists
-            .FirstOrDefault(sl => sl.GuestId == guestId && sl.TestId == testQuestionViewModel.TestId);
+                    .FirstOrDefault(sl => sl.GuestId == guestId && sl.TestId == testQuestionViewModel.TestId);
 
                 if (existingScoreGuest != null)
-                {
-                    
+                {       
                     existingScoreGuest.Score = scoreGuest;
                 }
                 else
-                {
-                    
+                { 
                     var scoreList = new ScoreList
                     {
                         GuestId = guestId,
@@ -215,15 +200,13 @@ namespace OnlineSurveyApp.Panel.UI.Controllers
 
                 var currentQuestionNumberGuest = HttpContext.Session.GetInt32("CurrentQuestionNumber") ?? 0;
                 currentQuestionNumberGuest++; 
-
                 
                 HttpContext.Session.SetInt32("CurrentQuestionNumber", currentQuestionNumberGuest);
 
                 var hasMoreQuestionsGuest = context.TestQuestions
-           .Where(tq => tq.TestId == testId)
-           .Skip(currentQuestionNumberGuest)
-           .Any();
-
+                    .Where(tq => tq.TestId == testId)
+                    .Skip(currentQuestionNumberGuest)
+                    .Any();
 
                 if (!hasMoreQuestionsGuest)
                 {
@@ -234,22 +217,18 @@ namespace OnlineSurveyApp.Panel.UI.Controllers
                    
                     return RedirectToAction("TestCompleted", new { testId = testQuestionViewModel.TestId, scoreGuest });
                 }
-
-
                 
                 return RedirectToAction("Test", new { testId = testQuestionViewModel.TestId });
             }
-
 
             var username = User?.Identity?.Name;
             var userID = context.Users.Where(x => x.UserName == username).Select(y => y.Id).FirstOrDefault();
             var userId = userID;
 
             var correctAnswer = context.CorrectAnswers
-      .Where(ca => ca.QuestionId == testQuestionViewModel.QuestionId && ca.TestId == testId)
-      .Select(ca => ca.Correct)
-      .FirstOrDefault();
-
+                .Where(ca => ca.QuestionId == testQuestionViewModel.QuestionId && ca.TestId == testId)
+                .Select(ca => ca.Correct)
+                .FirstOrDefault();
 
             int score = HttpContext.Session.GetInt32("UserScore") ?? 0;
 
@@ -261,7 +240,7 @@ namespace OnlineSurveyApp.Panel.UI.Controllers
             HttpContext.Session.SetInt32("UserScore", score);
 
             var existingScore = context.ScoreLists
-        .FirstOrDefault(sl => sl.AppUserId == userId && sl.TestId == testQuestionViewModel.TestId);
+                .FirstOrDefault(sl => sl.AppUserId == userId && sl.TestId == testQuestionViewModel.TestId);
 
             if (existingScore != null)
             {
@@ -284,15 +263,14 @@ namespace OnlineSurveyApp.Panel.UI.Controllers
             context.SaveChanges();
 
             var currentQuestionNumber = HttpContext.Session.GetInt32("CurrentQuestionNumber") ?? 0;
-            currentQuestionNumber++; 
-
+            currentQuestionNumber++;
             
             HttpContext.Session.SetInt32("CurrentQuestionNumber", currentQuestionNumber);
 
             var hasMoreQuestions = context.TestQuestions
-       .Where(tq => tq.TestId == testId)
-       .Skip(currentQuestionNumber)
-       .Any();
+                .Where(tq => tq.TestId == testId)
+                .Skip(currentQuestionNumber)
+                .Any();
 
 
             if (!hasMoreQuestions)
@@ -301,13 +279,10 @@ namespace OnlineSurveyApp.Panel.UI.Controllers
                 HttpContext.Session.Remove("CurrentQuestionNumber");
                 HttpContext.Session.Remove("UserScore");
                 HttpContext.Session.Remove("GuestId");
-
                 
                 return RedirectToAction("TestCompleted", new { testId = testQuestionViewModel.TestId, score });
             }
 
-
-            
             return RedirectToAction("Test", new { testId = testQuestionViewModel.TestId });
         }
 
@@ -350,16 +325,11 @@ namespace OnlineSurveyApp.Panel.UI.Controllers
         {
             return View();
         }
-
         public IActionResult TestNotFound()
         {
 
             return View();
         }
-
-
-
-
 
     }
 }
