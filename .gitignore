@@ -361,3 +361,5 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/OnlineSurveyApp.DataAccess/Concrete/Context.cs
+/OnlineSurveyApp.Panel.UI/appsettings.json
